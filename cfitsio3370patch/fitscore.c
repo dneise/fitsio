@@ -4155,6 +4155,7 @@ int ffrhdu(fitsfile *fptr,    /* I - FITS file pointer */
 
     else if (!strcmp(name, "XTENSION"))   /* this is an XTENSION keyword */
     {
+        (fptr->Fptr)->ZHEAPPTR_found = 0;
         if (ffc2s(value, xname, status) > 0)  /* get the value string */
         {
             ffpmsg("Bad value string for XTENSION keyword:");
@@ -4851,7 +4852,7 @@ int ffbinit(fitsfile *fptr,     /* I - FITS file pointer */
         else if (*status > 0)
             return(*status);
 
-        else if (name[0] == 'T')   /* keyword starts with 'T' ? */
+        else if ((name[0] == 'T') || !FSTRCMP(name, "ZHEAPPTR")) /* keyword starts with 'T' */
             ffgtbp(fptr, name, value, status); /* test if column keyword */
 
         else if (!FSTRCMP(name, "ZIMAGE"))
@@ -5272,7 +5273,11 @@ int ffgtbp(fitsfile *fptr,     /* I - FITS file pointer   */
             /* ignore this error, so don't return error status */
             return(*status);
         }
-        (fptr->Fptr)->heapstart = jjvalue; /* starting byte of the heap */
+        if (!(fptr->Fptr)->ZHEAPPTR_found)
+          (fptr->Fptr)->heapstart = jjvalue; /* starting byte of the heap */
+        if (!FSTRCMP(name, "ZHEAPPTR")){
+          (fptr->Fptr)->ZHEAPPTR_found = 1;
+        }
         return(*status);
     }
 
