@@ -34,6 +34,8 @@ SERVICES PROVIDED HEREUNDER."
 #ifndef _FITSIO_H
 #define _FITSIO_H
 
+#include <stdbool.h>
+
 #define CFITSIO_VERSION 3.37
 #define CFITSIO_MINOR 37
 #define CFITSIO_MAJOR 3
@@ -377,7 +379,7 @@ typedef struct      /* structure used to store basic FITS file information */
     LONGLONG numrows;    /* number of rows in the table (dynamically updated) */
     LONGLONG rowlength;  /* length of a table row or image size (bytes) */
     tcolumn *tableptr;   /* pointer to the table structure */
-    int ZHEAPPTR_found;  /* boolean that shows if ZHEAPPTR was found already. */
+    bool ZHEAPPTR_found;  /* boolean that shows if ZHEAPPTR was found already. */
     LONGLONG heapstart;  /* heap start byte relative to start of data unit */
     LONGLONG heapsize;   /* size of the heap, in bytes */
 
