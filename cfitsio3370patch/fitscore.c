@@ -4155,7 +4155,7 @@ int ffrhdu(fitsfile *fptr,    /* I - FITS file pointer */
 
     else if (!strcmp(name, "XTENSION"))   /* this is an XTENSION keyword */
     {
-        (fptr->Fptr)->ZHEAPPTR_found = 0;
+        (fptr->Fptr)->ZHEAPPTR_found = false;
         if (ffc2s(value, xname, status) > 0)  /* get the value string */
         {
             ffpmsg("Bad value string for XTENSION keyword:");
@@ -5276,7 +5276,7 @@ int ffgtbp(fitsfile *fptr,     /* I - FITS file pointer   */
         if (!(fptr->Fptr)->ZHEAPPTR_found)
           (fptr->Fptr)->heapstart = jjvalue; /* starting byte of the heap */
         if (!FSTRCMP(name, "ZHEAPPTR")){
-          (fptr->Fptr)->ZHEAPPTR_found = 1;
+          (fptr->Fptr)->ZHEAPPTR_found = true;
         }
         return(*status);
     }
