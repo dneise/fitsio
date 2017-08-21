@@ -169,7 +169,7 @@ class build_ext_subclass(build_ext):
 include_dirs=[numpy.get_include()]
 
 
-sources = ["fitsio/fitsio_pywrap.c"]
+sources = ["fact_fitsio/fitsio_pywrap.c"]
 data_files=[]
 
 ext=Extension("fitsio._fitsio_wrap",
